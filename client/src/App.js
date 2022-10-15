@@ -9,9 +9,7 @@ import Onboarding from "./components/pages/Onboarding/Onboarding";
 function App() {
   return (
     <UserProvider>
-      {/* <Landing /> */}
-      <Home />
-      {/* <Onboarding /> */}
+      <Landing />
     </UserProvider>
   );
 }
