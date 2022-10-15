@@ -23,9 +23,9 @@ export const createUser = asyncHandler (async (req, res) => {
 
     const userExists = await User.findOne({username})
 
-    // if(userExists){
-    //     res.status(400).json("User already exists")
-    // }
+    if(userExists){
+        res.status(400).json("User already exists")
+    }
     
     //Hash Password
     const salt = await bcrypt.genSalt(10)
