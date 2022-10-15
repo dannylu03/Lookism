@@ -54,7 +54,7 @@ def vectorize(df):
     similarity = cosine_similarity(reduced_data)
     print(similarity)
 
-    get_recommendations(df, 1, similarity)
+    return similarity
 
     # # Outfits with less tags have a lower probability of being recommended later.
     # # Recommendors produce better results if length of description is somewhat balanced
@@ -142,6 +142,9 @@ def create_csv():
     data = [
         {"outfit_id": 0, "tags": "streetwear, korean, smt"},
         {"outfit_id": 1, "tags": "sss, anything, smt, boobs"},
+        {"outfit_id": 2, "tags": "asdasd, emo, korean, boobs"},
+        {"outfit_id": 3, "tags": "sss, anything, smt, streetwear"},
+        {"outfit_id": 4, "tags": "sss, anything, smt, boobs"},
     ]
 
     with open("server/data.csv", "w") as file:
@@ -156,18 +159,23 @@ if __name__ == "__main__":
     print(db_df)
 
     preprocess(db_df)
-    vectorize(db_df)
+    similarity = vectorize(db_df)
+    # get_recommendations(db_df, )
 
-    # count_matrix, updated_df = vectorize(db_df)
-    # similarity_scores = calculate_similarity_score(count_matrix)
+    outfits_liked = ["0", "2"]
+    print(db_df)
+    user_scores = pd.DataFrame(db_df["outfit_id"])
+    user_scores["sim_scores"] = 0.0
 
-    # recommended_outfits = get_recommendations(updated_df, 1, similarity_scores)
-    # print(recommended_outfits)
+    for outfit_id in outfits_liked:
+        top_outfits_df, _ = get_recommendations(db_df, int(outfit_id), similarity)
+        user_scores = (
+            pd.concat([user_scores, top_outfits_df[["outfit_id", "sim_scores"]]])
+            .groupby(["outfit_id"], as_index=False)
+            .sum({"sim_scores"})
+        )
 
-    # labeled questions = preprocess(df)
-    # model = train_lookism_model(labeled_questions)
-
-    # labeled_data = preprocess(db_df)
-    # print(labeled_data)
-
-    # model = train_lookism_model(labeled_data)
+    top_outfits_per_user_df = user_scores.sort_values(by="sim_scores", ascending=False)[
+        1:20
+    ]
+    print(top_outfits_per_user_df)
