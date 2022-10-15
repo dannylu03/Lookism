@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -40,16 +39,13 @@ const userSchema = new Schema({
     }
   },
   personalphotos : [{
-    img: {
-        data: Buffer,
-        contentType: String
-      }  
+    type: mongoose.Schema.Types.ObjectId, ref: 'Card'
   }],
   likedphotos : [{
-    // TODO: Connect this to a card model
+    type: mongoose.Schema.Types.ObjectId, ref: 'Card'
   }]
-});
+}); 
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

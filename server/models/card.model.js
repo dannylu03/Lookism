@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: {
+  name: {
     type: String,
     required: true,
     unique: true,
@@ -24,6 +24,6 @@ const userSchema = new Schema({
   }],
   });
 
-const User = mongoose.model('User', userSchema);
+const Card = mongoose.model('Card', userSchema);
 
-module.exports = User;
+export default Card;
