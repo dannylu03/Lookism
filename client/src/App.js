@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import Landing from './components/pages/Landing/Landing';
+import SwipePage from './components/pages/Home/SwipePage';
 
 function App() {
   return (
-    <Landing />
+    <SwipePage />
   );
 }
 
