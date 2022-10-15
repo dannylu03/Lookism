@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
     unique: true,
     trim: true,
   },
@@ -20,10 +19,14 @@ const userSchema = new Schema({
     id: String
   },
   tags: [{
-    type: String
+    type: String,
+    required: true
+
   }],
   });
 
 const Card = mongoose.model('Card', userSchema);
+
+
 
 export default Card;

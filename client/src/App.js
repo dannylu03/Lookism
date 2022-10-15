@@ -1,16 +1,20 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./components/pages/Landing/Landing";
-import { UserProvider } from "./context/UserContext";
-import SwipePage  from "./components/pages/Home/SwipePage";
-import Home from "./components/pages/Home/Home";
 import Onboarding from "./components/pages/Onboarding/Onboarding";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState();
+
   return (
-    <UserProvider>
-      <Landing />
-    </UserProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing setUser={setUser} />} />
+        <Route path="/onboarding" element={<Onboarding user={user} />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

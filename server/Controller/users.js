@@ -1,5 +1,4 @@
 import User from "../models/user.model.js";
-import jwt from "jsonwebtoken";
 import bcrypt from 'bcryptjs';
 import asyncHandler from "express-async-handler";
 
@@ -19,13 +18,14 @@ export const createUser = asyncHandler (async (req, res) => {
     const username = req.body.username
     const password = req.body.password
     const gender = req.body.gender
+    const tags = req.body.tags
     const sizing = req.body.sizing
 
     const userExists = await User.findOne({username})
 
-    // if(userExists){
-    //     res.status(400).json("User already exists")
-    // }
+    if(userExists){
+        res.status(400).json("User already exists")
+    }
     
     //Hash Password
     const salt = await bcrypt.genSalt(10)
@@ -36,6 +36,7 @@ export const createUser = asyncHandler (async (req, res) => {
         username,
         password: hashedPassword,
         gender,
+        tags,
         sizing
     })
 
@@ -44,6 +45,7 @@ export const createUser = asyncHandler (async (req, res) => {
         _id: user.id,
         name: user.username,
         gender: user.gender,
+        tags: user.tags,
         sizing: user.sizing
         })
     } else {
@@ -62,6 +64,7 @@ export const loginUser = asyncHandler (async (req, res) =>{
             _id: user.id,
             name: user.username,
             gender: user.gender,
+            tags: user.tags,
             sizing: user.sizing,
         })
     } else{
@@ -92,25 +95,40 @@ export const deleteUser = asyncHandler (async (req, res) => {
 
 export const updateUser = asyncHandler (async (req, res) => {
 
+    const password = req.body.password
+    const user = await User.findById(req.params.id)
+    const username = req.body.username
+    const gender = req.body.gender
+    const tags = req.body.tags
+    const sizing = req.body.sizing
+    const personalphotos = req.body.personalphotos
+    const likedphotos = req.body.likedphotos
+
     try{
-
-        const user = await User.findById(req.params.id);
-
-        if(req.body.password !== user.password){
-            res.status(401)
-            throw new Error('User not authorized')
+        if(username){
+            user.username = username
         }
-
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        })
-
-        
-        res.status(200).json(updatedUser)
-    } catch(error){
-        res.status(404).json({ message: error.message })
+        if(gender){
+            user.gender = gender
+        }
+        if(tags){
+            user.tags = tags
+        }
+        if(sizing){
+            user.sizing = sizing
+        }
+        if(personalphotos){
+            user.personalphotos = personalphotos
+        }
+        if(likedphotos){
+            user.likedphotos = likedphotos
+        }
+        user.save();
+        res.status(200).json(user)
+    } catch{
+        res.status(400).json("Invalid Credentials")
     }
-    
 })
+
 
  

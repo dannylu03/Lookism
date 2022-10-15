@@ -11,15 +11,39 @@ export const getCards = async (req, res) => {
 }
 
 export const createCard = async (req, res) => {
-    const card = req.body;
 
-    const newCard = new Card(card);
-    try {
-        await newCard.save();
+    const name = req.body.name
+    const img = req.body.img
+    const clothinglist = req.body.clothinglist
+    const user = req.body.user
+    const tags = req.body.tags
 
-        res.status(201).json(newCard);
-    } catch (err) {
-        res.status(409).json({ message: err.message })
+    const cardExists = await Card.findOne({name})
+
+    if(cardExists){
+        res.status(400).json("Card already exists")
+    }
+
+    const card = await Card.create({
+        name,
+        img,
+        clothinglist,
+        user,
+        tags
+    })
+
+    if (card) {
+        res.status(201).json({
+        _id: card.id,
+        name: card.name,
+        img: card.img,
+        clothinglist: card.clotheslist,
+        user: card.user,
+        tags: card.tags
+        
+        })
+    } else {
+        res.status(400).json('Invalid card data')
     }
 }
 

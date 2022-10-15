@@ -18,6 +18,8 @@ const userSchema = new Schema({
     unique: false,
     trim: true
   },
+  tags: [{
+    type:String}],
   sizing: {
     shoesize: {
         type: String
@@ -47,5 +49,17 @@ const userSchema = new Schema({
 }); 
 
 const User = mongoose.model('User', userSchema);
+
+// User.findOne({})
+//   .populate('personalphotos')
+//   .exec((err, comment)=>{
+//     console.log(comment)
+//   })
+
+// User.findOne({})
+// .populate('likedphotos')
+// .exec((err, comment)=>{
+//   console.log(comment)
+// })
 
 export default User;
