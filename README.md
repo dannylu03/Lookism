@@ -1,2 +1,0 @@
-# Lookism
-Hack the valley
