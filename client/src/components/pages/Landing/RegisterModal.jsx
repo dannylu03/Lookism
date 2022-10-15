@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import UserContext, { useUserContext } from "../../../context/UserContext";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function RegisterModal({ closeModal }) {
   const [username, setUsername] = useState("");
@@ -11,6 +15,9 @@ function RegisterModal({ closeModal }) {
   const [jacketSize, setJacketSize] = useState();
   const [dressSize, setDressSize] = useState();
   const [sweaterSize, setSweaterSize] = useState();
+
+  const userContext = useUserContext();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     console.log("reached");
@@ -30,10 +37,16 @@ function RegisterModal({ closeModal }) {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Content-Type": "application/json",
     };
-    axios.post("http://localhost:8000/users/add", data, { headers });
+    let user = axios.post("http://localhost:8000/users/add", data, { headers });
     console.log(data);
+    navigate('/onboarding')
+    userContext.add(user);
     closeModal(false);
   };
+
+  useEffect(() => {
+    console.log(userContext);
+  }, []);
 
   return (
     <div className="w-screen h-screen bg-transparent/[0.5] fixed flex justify-center items-center">
