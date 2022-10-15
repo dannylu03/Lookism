@@ -1,10 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import SwipePage from './components/pages/Home/SwipePage';
+import logo from "./logo.svg";
+import "./App.css";
+import Landing from "./components/pages/Landing/Landing";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
-    <SwipePage />
+    <UserProvider>
+      <Landing />
+    </UserProvider>
   );
 }
 
