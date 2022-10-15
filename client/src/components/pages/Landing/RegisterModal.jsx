@@ -33,16 +33,10 @@ function RegisterModal({ setUser, closeModal }) {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Content-Type": "application/json",
     };
-    axios.post("http://localhost:8000/users/add", data, { headers })
-      .then(res => {
-        const newUser = res.data;
-        setUser(newUser)
-        closeModal(false);
-        navigate("/onboarding");
-      })
-      .catch(err => {
-        console.log(err.response.data);
-      })
+    let user = axios.post("http://localhost:8000/users/add", data, { headers });
+    setUser(user);
+    navigate("/onboarding");
+    closeModal(false);
   };
 
   return (
