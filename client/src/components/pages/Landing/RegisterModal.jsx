@@ -17,7 +17,6 @@ function RegisterModal({ setUser, closeModal }) {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    console.log("reached");
     e.preventDefault();
     let data = {
       sizing: {
@@ -34,11 +33,16 @@ function RegisterModal({ setUser, closeModal }) {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Content-Type": "application/json",
     };
-    let user = axios.post("http://localhost:8000/users/add", data, { headers });
-    setUser(user);
-    console.log(data);
-    navigate("/onboarding");
-    closeModal(false);
+    axios.post("http://localhost:8000/users/add", data, { headers })
+      .then(res => {
+        const newUser = res.data;
+        setUser(newUser)
+        closeModal(false);
+        navigate("/onboarding");
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      })
   };
 
   return (
@@ -149,7 +153,6 @@ const FormInput = ({ fieldName, type, placeholder, stateChanger }) => {
   const handleChange = (e) => {
     e.preventDefault();
     stateChanger(e.target.value);
-    console.log("sss");
   };
 
   return (
