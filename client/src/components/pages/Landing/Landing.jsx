@@ -43,7 +43,7 @@ function Landing({ setUser }) {
       {openRegisterModal && (
         <RegisterModal setUser={setUser} closeModal={setOpenRegisterModal} />
       )}
-      {openLoginModal && <LoginModal closeModal={setOpenLoginModal} />}
+      {openLoginModal && <LoginModal setUser = {setUser} closeModal={setOpenLoginModal} />}
     </div>
   );
 }
