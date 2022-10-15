@@ -18,6 +18,7 @@ export const createUser = asyncHandler (async (req, res) => {
     const username = req.body.username
     const password = req.body.password
     const gender = req.body.gender
+    const tags = req.body.tags
     const sizing = req.body.sizing
 
     const userExists = await User.findOne({username})
@@ -35,6 +36,7 @@ export const createUser = asyncHandler (async (req, res) => {
         username,
         password: hashedPassword,
         gender,
+        tags,
         sizing
     })
 
@@ -43,6 +45,7 @@ export const createUser = asyncHandler (async (req, res) => {
         _id: user.id,
         name: user.username,
         gender: user.gender,
+        tags: user.tags,
         sizing: user.sizing
         })
     } else {
@@ -61,6 +64,7 @@ export const loginUser = asyncHandler (async (req, res) =>{
             _id: user.id,
             name: user.username,
             gender: user.gender,
+            tags: user.tags,
             sizing: user.sizing,
         })
     } else{
@@ -91,7 +95,6 @@ export const deleteUser = asyncHandler (async (req, res) => {
 
 export const updateUser = asyncHandler (async (req, res) => {
 
-    const username = req.body.username
     const password = req.body.password
     const user = await User.findById(req.params.id);
 
