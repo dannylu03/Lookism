@@ -96,17 +96,32 @@ export const deleteUser = asyncHandler (async (req, res) => {
 export const updateUser = asyncHandler (async (req, res) => {
 
     const password = req.body.password
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id)
+    const username = req.body.username
+    const gender = req.body.gender
+    const tags = req.body.tags
+    const sizing = req.body.sizing
+
 
     if(user && (await bcrypt.compare(password, user.password))){
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        })
-
-        res.status(200).json(updatedUser)
+        if(username){
+            user.username = username
+        }
+        if(gender){
+            user.gender = gender
+        }
+        if(tags){
+            user.tags = tags
+        }
+        if(sizing){
+            user.sizing = sizing
+        }
+        user.save();
+        res.status(200).json(user)
     } else{
         res.status(400).json("Invalid Credentials")
     }
 })
+
 
  

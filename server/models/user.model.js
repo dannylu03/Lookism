@@ -18,6 +18,8 @@ const userSchema = new Schema({
     unique: false,
     trim: true
   },
+  tags: [{
+    type:String}],
   sizing: {
     shoesize: {
         type: String
