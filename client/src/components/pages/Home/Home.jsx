@@ -3,7 +3,6 @@ import SideBar from "./SideBar";
 import SideBarSection from "./SideBarSection";
 import SwipePage from "./SwipePage";
 
-
 function Home () {
     return (
         <div>

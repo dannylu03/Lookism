@@ -1,8 +1,10 @@
 import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
+import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 
 
+// Need Better Privacy Protection Here (Don't send all user information. Actually we don't even need this, it's just used for tesing)
 export const getUsers = asyncHandler (async (req, res) => {
     try {
         const users = await User.find();
@@ -46,7 +48,8 @@ export const createUser = asyncHandler (async (req, res) => {
         name: user.username,
         gender: user.gender,
         tags: user.tags,
-        sizing: user.sizing
+        sizing: user.sizing,
+        token: generateToken(user._id)
         })
     } else {
         res.status(400).json('Invalid user data')
@@ -66,6 +69,7 @@ export const loginUser = asyncHandler (async (req, res) =>{
             gender: user.gender,
             tags: user.tags,
             sizing: user.sizing,
+            token: generateToken(user._id)
         })
     } else{
         res.status(400).json("Invalid Credentials")
@@ -75,7 +79,7 @@ export const loginUser = asyncHandler (async (req, res) =>{
 
 export const getUserId = asyncHandler (async (req, res) => {
     try {
-        const user = await User.findById(req.params.id)
+        const user = await User.findById(req.user.id)
 
         res.status(200).json(user);
     } catch (error) {
@@ -95,7 +99,6 @@ export const deleteUser = asyncHandler (async (req, res) => {
 
 export const updateUser = asyncHandler (async (req, res) => {
 
-    const password = req.body.password
     const user = await User.findById(req.params.id)
     const username = req.body.username
     const gender = req.body.gender
@@ -129,6 +132,12 @@ export const updateUser = asyncHandler (async (req, res) => {
         res.status(400).json("Invalid Credentials")
     }
 })
+
+const generateToken = (id) =>{
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+    })
+}
 
 
  
