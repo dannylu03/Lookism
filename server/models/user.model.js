@@ -11,13 +11,13 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    unique: true,
-    trim: true,
+    required: true,
+    trim: true
   },
   gender: {
     type: String,
-    unique: true,
-    trim: true,
+    unique: false,
+    trim: true
   },
   sizing: {
     shoesize: {

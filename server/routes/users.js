@@ -11,8 +11,11 @@ router.route("/").get((req, res) => {
 // Post request
 router.route("/add").post((req, res) => {
   const username = req.body.username;
+  const password = req.body.password;
+  const gender = req.body.gender;
+  const sizing = req.body.sizing;
 
-  const newUser = new User({ username });
+  const newUser = new User({ username, password, gender, sizing });
 
   newUser
     .save()
@@ -33,21 +36,17 @@ router.route('/:id').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
   
-  // Update
+  // Update User
   router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id)
       .then(user => {
         user.username = req.body.username;
-        user.description = req.body.description;
-        user.duration = Number(req.body.duration);
-        user.date = Date.parse(req.body.date);
-  
+ 
         user.save()
           .then(() => res.json('User updated!'))
           .catch(err => res.status(400).json('Error: ' + err));
       })
       .catch(err => res.status(400).json('Error: ' + err));
   });
-
 
 module.exports = router;
