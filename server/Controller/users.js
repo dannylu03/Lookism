@@ -19,9 +19,7 @@ export const createUser = asyncHandler (async (req, res) => {
 
     const username = req.body.username
     const password = req.body.password
-    const gender = req.body.gender
-    const tags = req.body.tags
-    const sizing = req.body.sizing
+    const info = req.body.info
 
     const userExists = await User.findOne({username})
 
@@ -37,18 +35,14 @@ export const createUser = asyncHandler (async (req, res) => {
     const user = await User.create({
         username,
         password: hashedPassword,
-        gender,
-        tags,
-        sizing
+        info
     })
 
     if (user) {
         res.status(201).json({
         _id: user.id,
         name: user.username,
-        gender: user.gender,
-        tags: user.tags,
-        sizing: user.sizing,
+        info: user.info,
         token: generateToken(user._id)
         })
     } else {
@@ -66,9 +60,7 @@ export const loginUser = asyncHandler (async (req, res) =>{
         res.json({
             _id: user.id,
             name: user.username,
-            gender: user.gender,
-            tags: user.tags,
-            sizing: user.sizing,
+            info: user.info,
             token: generateToken(user._id)
         })
     } else{
