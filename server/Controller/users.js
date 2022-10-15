@@ -92,25 +92,19 @@ export const deleteUser = asyncHandler (async (req, res) => {
 
 export const updateUser = asyncHandler (async (req, res) => {
 
-    try{
+    const username = req.body.username
+    const password = req.body.password
+    const user = await User.findById(req.params.id);
 
-        const user = await User.findById(req.params.id);
-
-        if(req.body.password !== user.password){
-            res.status(401)
-            throw new Error('User not authorized')
-        }
-
+    if(user && (await bcrypt.compare(password, user.password))){
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
         })
 
-        
         res.status(200).json(updatedUser)
-    } catch(error){
-        res.status(404).json({ message: error.message })
+    } else{
+        res.status(400).json("Invalid Credentials")
     }
-    
 })
 
  
