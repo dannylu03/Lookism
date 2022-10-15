@@ -22,8 +22,11 @@ connection.once("open", () => {
 
 import usersRouter from "./routes/users.js";
 import cardsRouter from "./routes/cards.js";
+import infoRouter from "./routes/userinfos.js";
+
 app.use("/users", usersRouter);
 app.use("/cards", cardsRouter);
+app.use("/infos", infoRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

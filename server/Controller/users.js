@@ -78,19 +78,14 @@ export const loginUser = asyncHandler (async (req, res) =>{
 })
 
 export const getUserId = asyncHandler (async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id)
 
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(404).json({ message: error.message })
+    const user = await User.findById(req.params.id)
+
+    if(!user){
+        res.status(400).json("User not found")
     }
-})
 
-export const deleteUser = asyncHandler (async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id)
-        
         res.status(200).json(user);
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -98,46 +93,44 @@ export const deleteUser = asyncHandler (async (req, res) => {
 })
 
 export const updateUser = asyncHandler (async (req, res) => {
-
+    
     const user = await User.findById(req.params.id)
     const username = req.body.username
-    const gender = req.body.gender
-    const tags = req.body.tags
-    const sizing = req.body.sizing
-    const personalphotos = req.body.personalphotos
-    const likedphotos = req.body.likedphotos
+    const password = req.body.password
 
     try{
         if(username){
             user.username = username
         }
-        if(gender){
-            user.gender = gender
+        if(password){
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassword = await bcrypt.hash(password, salt)
+            user.password = hashedPassword
         }
-        if(tags){
-            user.tags = tags
-        }
-        if(sizing){
-            user.sizing = sizing
-        }
-        if(personalphotos){
-            user.personalphotos = personalphotos
-        }
-        if(likedphotos){
-            user.likedphotos = likedphotos
-        }
-        user.save();
-        res.status(200).json(user)
-    } catch{
+        user.save()
+        res.status(200).json(
+            user.username
+        )
+    } catch(error){
         res.status(400).json("Invalid Credentials")
     }
 })
+
+export const deleteUser = asyncHandler (async (req, res) => {
+
+    try {
+        const user = await User.findByIdAndDelete(req.params.id)
+        
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+
+})
+
 
 const generateToken = (id) =>{
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
     })
 }
-
-
- 
