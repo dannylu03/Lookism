@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  mode: 'jit',
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
-      colours: {
-        'ash-gray': '#c6c8bb',
-        'camel': '#caa473',
+      colors: {
+        'ash-gray': '#C6C8BB',
+        'camel': '#CAA473',
         'timberwolf': '#dad0c7',
         'cultured': '#ededed',
         'cafe-noir': '#443220',
