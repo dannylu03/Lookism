@@ -55,7 +55,7 @@ export const deleteCard = async (req, res) => {
 
     if (!card) {
       res.status(400)
-      throw new Error('Goal not found')
+      throw new Error('Card not found')
     }
   
     const user = await User.findById(req.user.id)

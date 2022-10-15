@@ -14,7 +14,7 @@ export const createInfo = async (req, res) => {
     const infoExists = await Info.findOne({name})
 
     if(infoExists){
-        res.status(400).json("Card already exists")
+        res.status(400).json("User Info already exists")
     }
 
     const info = await Info.create({
