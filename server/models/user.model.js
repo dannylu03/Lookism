@@ -50,4 +50,16 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
+// User.findOne({})
+//   .populate('personalphotos')
+//   .exec((err, comment)=>{
+//     console.log(comment)
+//   })
+
+// User.findOne({})
+// .populate('likedphotos')
+// .exec((err, comment)=>{
+//   console.log(comment)
+// })
+
 export default User;

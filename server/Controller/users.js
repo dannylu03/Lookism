@@ -101,9 +101,10 @@ export const updateUser = asyncHandler (async (req, res) => {
     const gender = req.body.gender
     const tags = req.body.tags
     const sizing = req.body.sizing
+    const personalphotos = req.body.personalphotos
+    const likedphotos = req.body.likedphotos
 
-
-    if(user && (await bcrypt.compare(password, user.password))){
+    try{
         if(username){
             user.username = username
         }
@@ -116,9 +117,15 @@ export const updateUser = asyncHandler (async (req, res) => {
         if(sizing){
             user.sizing = sizing
         }
+        if(personalphotos){
+            user.personalphotos = personalphotos
+        }
+        if(likedphotos){
+            user.likedphotos = likedphotos
+        }
         user.save();
         res.status(200).json(user)
-    } else{
+    } catch{
         res.status(400).json("Invalid Credentials")
     }
 })
