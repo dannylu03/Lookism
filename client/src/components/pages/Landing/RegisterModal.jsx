@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext } from "react";
 import UserContext, { useUserContext } from "../../../context/UserContext";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function RegisterModal({ closeModal }) {
   const [username, setUsername] = useState("");
@@ -16,6 +17,7 @@ function RegisterModal({ closeModal }) {
   const [sweaterSize, setSweaterSize] = useState();
 
   const userContext = useUserContext();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     console.log("reached");
@@ -37,6 +39,7 @@ function RegisterModal({ closeModal }) {
     };
     let user = axios.post("http://localhost:8000/users/add", data, { headers });
     console.log(data);
+    navigate('/onboarding')
     userContext.add(user);
     closeModal(false);
   };
