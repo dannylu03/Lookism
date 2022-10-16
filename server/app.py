@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import re
 
+import sys
 from gensim import utils
 from gensim.models.doc2vec import TaggedDocument
 from gensim.models import Doc2Vec
@@ -136,16 +137,16 @@ def train_lookism_model(data):
     return model
 
 
-def create_csv():
+def create_csv(data):
     header = ["outfit_id", "tags"]
 
-    data = [
-        {"outfit_id": 0, "tags": "streetwear, korean, smt"},
-        {"outfit_id": 1, "tags": "sss, anything, smt, boobs"},
-        {"outfit_id": 2, "tags": "asdasd, emo, korean, boobs"},
-        {"outfit_id": 3, "tags": "sss, anything, smt, streetwear"},
-        {"outfit_id": 4, "tags": "sss, anything, smt, boobs"},
-    ]
+    # data = [
+    #     {"outfit_id": 0, "tags": "streetwear, korean, smt"},
+    #     {"outfit_id": 1, "tags": "sss, anything, smt, boobs"},
+    #     {"outfit_id": 2, "tags": "asdasd, emo, korean, boobs"},
+    #     {"outfit_id": 3, "tags": "sss, anything, smt, streetwear"},
+    #     {"outfit_id": 4, "tags": "sss, anything, smt, boobs"},
+    # ]
 
     with open("server/data.csv", "w") as file:
         writer = csv.DictWriter(file, fieldnames=header)
@@ -154,28 +155,42 @@ def create_csv():
 
 
 if __name__ == "__main__":
-    create_csv()
-    db_df = pd.read_csv("server/data.csv")
-    print(db_df)
+    # Case 1: Set up initial dataframe
+    if sys.argv[2] == "postData":
+        all_outfits = sys.argv[1]
+        create_csv(all_outfits)
 
-    preprocess(db_df)
-    similarity = vectorize(db_df)
-    # get_recommendations(db_df, )
+    # Case 2: Recommend 5 cards
+    else:
+        liked_indices = sys.argv[1]
 
-    outfits_liked = ["0", "2"]
-    print(db_df)
-    user_scores = pd.DataFrame(db_df["outfit_id"])
-    user_scores["sim_scores"] = 0.0
+        db_df = pd.read_csv("server/data.csv")
+        print(db_df)
 
-    for outfit_id in outfits_liked:
-        top_outfits_df, _ = get_recommendations(db_df, int(outfit_id), similarity)
-        user_scores = (
-            pd.concat([user_scores, top_outfits_df[["outfit_id", "sim_scores"]]])
-            .groupby(["outfit_id"], as_index=False)
-            .sum({"sim_scores"})
-        )
+        preprocess(db_df)
+        similarity = vectorize(db_df)
+        # get_recommendations(db_df, )
 
-    top_outfits_per_user_df = user_scores.sort_values(by="sim_scores", ascending=False)[
-        1:20
-    ]
-    print(top_outfits_per_user_df)
+        # outfits_liked = ["0", "2"]
+        print(db_df)
+        user_scores = pd.DataFrame(db_df["outfit_id"])
+        user_scores["sim_scores"] = 0.0
+
+        if sys.argv[2] == "reccomendOutfits":
+            for outfit_id in liked_indices:
+                top_outfits_df, _ = get_recommendations(
+                    db_df, int(outfit_id), similarity
+                )
+                user_scores = (
+                    pd.concat(
+                        [user_scores, top_outfits_df[["outfit_id", "sim_scores"]]]
+                    )
+                    .groupby(["outfit_id"], as_index=False)
+                    .sum({"sim_scores"})
+                )
+
+            top_outfits_per_user_df = user_scores.sort_values(
+                by="sim_scores", ascending=False
+            )[1:20]
+
+        print(top_outfits_per_user_df)
