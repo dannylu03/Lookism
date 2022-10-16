@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Gallery from "../../Gallery";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Onboarding = ({ user }) => {
     const config = {
@@ -9,6 +10,13 @@ const Onboarding = ({ user }) => {
             Authorization: `Bearer ${user.token}`
         }
     };
+    
+  useEffect(() => {
+    let allOutfits = axios.get("http://localhost:8000/cards/").then((res) => {
+      console.log("hi");
+    });
+  }, []);
+    
     const navigate = useNavigate();
     const [userStyles, setStyles] = useState([])
     const updatingUser = () => {

@@ -34,16 +34,18 @@ function RegisterModal({ setUser, closeModal }) {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Content-Type": "application/json",
     };
-    axios.post("http://localhost:8000/users/add", data, { headers })
-      .then(res => {
+    axios
+      .post("http://localhost:8000/users/add", data, { headers })
+      .then((res) => {
         setUser(res.data);
         navigate("/onboarding");
         closeModal(false);
-      }).catch(err => console.log(err.message))
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
-    <div className="w-screen h-screen bg-transparent/[0.5] fixed flex justify-center items-center">
+    <div className="w-screen h-screen bg-transparent/[0.5] fixed flex justify-center items-center z-10">
       <div className="w-1/2 rounded-md bg-timberwolf flex flex-col p-6">
         <div className="flex justify-end text-camel text-bold text-xl border-none">
           <button onClick={() => closeModal(false)}> X </button>
