@@ -1,3 +1,6 @@
+import CardData from "../models/cardsdata.model.js";
+import asyncHandler from "express-async-handler";
+
 export const recommendOutfits = async (req, res) => {
   var dataToSend;
 
@@ -12,3 +15,18 @@ export const recommendOutfits = async (req, res) => {
     res.sendFile(`${__dirname}/public/result.html`);
   });
 };
+
+export const createData = asyncHandler (async (req, res)=>{
+  const data = req.body.data;
+
+  const carddata = await CardData.create({
+    data
+  });
+
+  try {
+    res.status(200).json(carddata);
+  } catch {
+    res.status(400).json("Invalid card data");
+  }
+
+})
