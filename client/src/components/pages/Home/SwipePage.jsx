@@ -41,6 +41,9 @@ function SwipePage ({ user }) {
             tags: userTags.slice().concat(...cardBatch[numSwipe].tags)
         }, config)
         .then(res => {
+            // user = {_id: user._id, name: user.name, likedphotos: [cardBatch[numSwipe]], token: user.token}
+            // console.log(user.likedphotos);
+            // user.likedphotos.push(cardBatch[numSwipe])
             setUserTags(userTags.slice(0).concat(...cardBatch[numSwipe].tags))
             setNumSwiped((numSwipe + 1) % 5);
             setSwipedRight(true);
