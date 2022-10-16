@@ -13,9 +13,39 @@ const userSchema = new Schema({
     required: true,
     trim: true
   },
-  info: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'Info'
-  }
+  gender: {
+      type: String,
+      unique: false,
+      trim: true
+  },
+  tags: [{
+      type:String}],
+  sizing: {
+      shoesize: {
+          type: String
+      },
+      pantsize: {
+          type: String
+      },
+      shirtsize: {
+          type: String
+      },
+      jacketsize: {
+          type: String
+      },
+      dresssize: {
+          type: String
+      },
+      sweatersize: {
+          type: String
+      }
+  },
+  personalphotos : [{
+      type: mongoose.Schema.Types.ObjectId, ref: 'Card'
+  }],
+  likedphotos : [{
+      type: mongoose.Schema.Types.ObjectId, ref: 'Card'
+  }]
 
 }); 
 
