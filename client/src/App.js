@@ -24,16 +24,16 @@ function App() {
   const [user, setUser] = useState();
 
   return (
-    <ChakraProvider theme={theme}>
-      {/* <BrowserRouter>
+    // <ChakraProvider theme={theme}>
+      <BrowserRouter>
       <Routes>
           <Route path="/" element={<Landing setUser={setUser} />} />
           <Route path="/onboarding" element={<Onboarding user={user} />} />
           <Route path="/home" element={<Home user={user} />} />
         </Routes>
-      </BrowserRouter> */}
-      <Home />
-    </ChakraProvider>
+      </BrowserRouter>
+    //   <Home />
+    // </ChakraProvider>
   );
 }
 
