@@ -16,7 +16,9 @@ const userSchema = new Schema({
     type: String
     }],
   user: {
-    id: String
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   tags: [{
     type: String,
@@ -26,7 +28,5 @@ const userSchema = new Schema({
   });
 
 const Card = mongoose.model('Card', userSchema);
-
-
 
 export default Card;

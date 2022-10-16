@@ -14,38 +14,39 @@ const userSchema = new Schema({
     trim: true
   },
   gender: {
-    type: String,
-    unique: false,
-    trim: true
+      type: String,
+      unique: false,
+      trim: true
   },
   tags: [{
-    type:String}],
+      type:String}],
   sizing: {
-    shoesize: {
-        type: String
-    },
-    pantsize: {
-        type: String
-    },
-    shirtsize: {
-        type: String
-    },
-    jacketsize: {
-        type: String
-    },
-    dresssize: {
-        type: String
-    },
-    sweatersize: {
-        type: String
-    }
+      shoesize: {
+          type: String
+      },
+      pantsize: {
+          type: String
+      },
+      shirtsize: {
+          type: String
+      },
+      jacketsize: {
+          type: String
+      },
+      dresssize: {
+          type: String
+      },
+      sweatersize: {
+          type: String
+      }
   },
   personalphotos : [{
-    type: mongoose.Schema.Types.ObjectId, ref: 'Card'
+      type: mongoose.Schema.Types.ObjectId, ref: 'Card'
   }],
   likedphotos : [{
-    type: mongoose.Schema.Types.ObjectId, ref: 'Card'
+      type: mongoose.Schema.Types.ObjectId, ref: 'Card'
   }]
+
 }); 
 
 const User = mongoose.model('User', userSchema);
