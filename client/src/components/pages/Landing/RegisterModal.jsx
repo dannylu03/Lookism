@@ -34,12 +34,14 @@ function RegisterModal({ setUser, closeModal }) {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       "Content-Type": "application/json",
     };
-    axios.post("http://localhost:8000/users/add", data, { headers })
-      .then(res => {
+    axios
+      .post("http://localhost:8000/users/add", data, { headers })
+      .then((res) => {
         setUser(res.data);
         navigate("/onboarding");
         closeModal(false);
-      }).catch(err => console.log(err.message))
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
