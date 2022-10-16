@@ -4,6 +4,7 @@ import landing_image from "../../../assets/image/landing_image.png";
 import logo from "../../../assets/image/lookism.png"
 import RegisterModal from "./RegisterModal";
 import LoginModal from "./LoginModal";
+import Wave from 'react-wavify'
 
 function Landing({ setUser }) {
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
@@ -23,7 +24,7 @@ function Landing({ setUser }) {
         </h3>
         <div className="flex flex-col justify-around w-1/2">
           <button
-            className="w-full inline-block px-6 py-2 border-2 border-camel text-camel font-medium text-xs leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out mt-3"
+            className="w-full z-5 bg-cultured inline-block px-6 py-2 border-2 border-camel text-camel font-medium text-xs leading-normal uppercase rounded hover:shadow-md transition duration-500 ease mt-3"
             onClick={() => {
               setOpenRegisterModal(true);
             }}
@@ -32,7 +33,7 @@ function Landing({ setUser }) {
           </button>
 
           <button
-            className="w-full inline-block px-6 py-2.5 bg-camel text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:shadow-lg transition duration-150 ease-in-out mt-3"
+            className="w-full z-10 inline-block px-6 py-2.5 bg-camel text-white font-medium text-xs leading-normal uppercase rounded shadow-md hover:shadow-md transition duration-500 ease mt-3"
             onClick={() => {
               setOpenLoginModal(true);
             }}
@@ -45,6 +46,37 @@ function Landing({ setUser }) {
         <RegisterModal setUser={setUser} closeModal={setOpenRegisterModal} />
       )}
       {openLoginModal && <LoginModal setUser = {setUser} closeModal={setOpenLoginModal} />}
+      <Wave fill='#caa473' className="absolute bottom-0 -z-5"
+        paused={false}
+        options ={{
+          height: 10,
+          amplitude: 80,
+          speed: 0.05,
+          points: 4,
+          opacity:0.6
+        }}
+      />
+      <Wave fill='#caa473' className="absolute bottom-0 -z-5"
+        paused={false}
+        options ={{
+          height: 80,
+          amplitude: 60,
+          speed: 0.1,
+          points: 4,
+          opacity:0.4
+        }}
+      />
+      <Wave fill='#caa473' className="absolute bottom-0 -z-5"
+        paused={false}
+        options ={{
+          height: 80,
+          amplitude: 40,
+          speed: 0.15,
+          points: 4,
+          opacity:0.8
+        }}
+      />
+
     </div>
   );
 }

@@ -43,7 +43,7 @@ function RegisterModal({ setUser, closeModal }) {
   };
 
   return (
-    <div className="w-screen h-screen bg-transparent/[0.5] fixed flex justify-center items-center">
+    <div className="w-screen h-screen bg-transparent/[0.5] fixed flex justify-center items-center z-10">
       <div className="w-1/2 rounded-md bg-timberwolf flex flex-col p-6">
         <div className="flex justify-end text-camel text-bold text-xl border-none">
           <button onClick={() => closeModal(false)}> X </button>
