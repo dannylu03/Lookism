@@ -10,15 +10,47 @@ const Profile = () => {
         <h1 className='font-bold text-cafe-noir text-2xl p-2'>Your Styles</h1>
         <div className='overflow-y-auto h-screen'>
           <Grid templateColumns='repeat(2, 1fr)' gap={8} padding={'8'}>
-              <Card img='1'/>
-              <Card img='2'/>
-              <Card img='3'/>
-              <Card img='4'/>
-              <Card img='5'/>
-              <Card img='5'/>
-              <Card img='5'/>
-              <Card img='5'/>
-              <Card img='5'/>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/0-minimalist.jpeg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/juan.jpg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/terry.jpg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/danny.jpg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/friends1.jpg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/friends2.jpg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/16-kpop.jpeg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/12-wild-west.jpeg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/11-elegant.jpeg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+              <div className={"relative h-full w-full rounded-xl overflow-hidden mx-1 transition-all duration-500 ease"}>
+                <img src={require(`../../../assets/image/4-vintage.jpeg`)} alt={``} className="rounded-xl h-auto w-full" />
+                <div className="absolute top-4 z-10 inline-block m-auto text-white text-sm bg-camel rounded-xl p-2">Minimalist</div>
+              </div>
+
           </Grid>
         </div>
     </VStack>
