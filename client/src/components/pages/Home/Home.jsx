@@ -1,14 +1,13 @@
 import React from "react";
 import SideBar from "./SideBar";
-import SideBarSection from "./SideBarSection";
 import SwipePage from "./SwipePage";
 
-function Home () {
+
+function Home ({user, setUser}) {
     return (
-        <div>
-            <SideBar />
-            <SideBarSection />
-            <SwipePage />
+        <div className="h-full w-full">
+            <SideBar user={user}/>
+            <SwipePage user={user} setUser={setUser}/>
         </div>
     );
 }
