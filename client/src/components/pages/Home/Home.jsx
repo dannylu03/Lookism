@@ -3,14 +3,14 @@ import SideBar from "./SideBar";
 import SideBarSection from "./SideBarSection";
 import SwipePage from "./SwipePage";
 
-function Home () {
-    return (
-        <div>
-            <SideBar />
-            <SideBarSection />
-            <SwipePage />
-        </div>
-    );
+function Home({ user }) {
+  return (
+    <div>
+      <SideBar user={user} />
+      <SideBarSection />
+      {/* <SwipePage /> */}
+    </div>
+  );
 }
 
 export default Home;
