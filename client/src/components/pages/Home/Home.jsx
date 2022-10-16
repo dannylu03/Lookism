@@ -1,7 +1,10 @@
 import React from "react";
 import SideBar from "./SideBar";
 import SwipePage from "./SwipePage";
+// import {HStack } from "@chakra-ui/react";
 
+// function Home ({ user }) {
+//     const [section, setSection] = React.useState('profile');
 
 function Home ({user, setUser}) {
     return (
@@ -10,6 +13,12 @@ function Home ({user, setUser}) {
             <SwipePage user={user} setUser={setUser}/>
         </div>
     );
+    // return (
+    //     <HStack>
+    //         <SideBarSection section={section} />
+    //         <SideBar section={section} setSection={setSection} user={user}/>
+    //         {/* <SwipePage /> */}
+    //     </HStack>
 }
 
 export default Home;
