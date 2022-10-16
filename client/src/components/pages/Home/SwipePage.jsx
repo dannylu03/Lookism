@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import SwipeCard from "../../SwipeCard";
+import { HStack, VStack } from "@chakra-ui/react";
 
 function SwipePage ({ user }) {
     // const sleep = (ms) => {
@@ -97,15 +98,15 @@ function SwipePage ({ user }) {
 
 
     return (
-       <div className="w-full h-3/5 flex flex-col items-center justify-center">
-            <h1>"Swipe" Left or Right!</h1>
+        <VStack>
+            <h1 className="w-full text-center">"Swipe" Left or Right!</h1>
             <SwipeCard image={cardBatch[numSwipe]?.img || "0-minimalist.jpeg"} swipedLeft={swipedLeft} swipedRight={swipedRight}/>
-            <div className="flex items-center justify-around h-auto w-[38%]">
-                <button onClick={swipeLeft} className="w-[15%] bg-cultured rounded-[50%]"><img src={require(`../../../assets/image/left.png`)} alt="left" className="h-auto w-full"/></button>
-                <button onClick={swipeRight} className="w-[15%] bg-cultured rounded-[50%]"><img src={require(`../../../assets/image/right.png`)}alt="right" className="h-auto w-full" /></button>
-            </div>
-       </div>
-      );
+            <HStack gap={100}>
+                <button onClick={swipeLeft} className="bg-cultured rounded-[50%]"><img src={require(`../../../assets/image/left.png`)} alt="left" className="h-auto w-full"/></button>
+                <button onClick={swipeRight} className="bg-cultured rounded-[50%]"><img src={require(`../../../assets/image/right.png`)} alt="right" className="h-auto w-full"/></button>
+            </HStack>
+        </VStack>
+    )
 }
 
 export default SwipePage;

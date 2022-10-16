@@ -24,7 +24,7 @@ function App() {
   const [user, setUser] = useState();
 
   return (
-    // <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
       <BrowserRouter>
       <Routes>
           <Route path="/" element={<Landing setUser={setUser} />} />
@@ -32,8 +32,7 @@ function App() {
           <Route path="/home" element={<Home user={user} />} />
         </Routes>
       </BrowserRouter>
-    //   <Home />
-    // </ChakraProvider>
+    </ChakraProvider>
   );
 }
 
