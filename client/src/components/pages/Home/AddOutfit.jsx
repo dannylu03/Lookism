@@ -41,7 +41,7 @@ function AddOutfitModal({ user, closeModal }) {
     //   "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     //   "Content-Type": "multipart/form-data'",
     // };
-    let outfit = axios.post("http://localhost:8000/cards/add", data, config);
+    let outfit = axios.put("http://localhost:8000/cards/add", data, config);
     console.log(data);
     for (const value of data.values()) {
       console.log(value);
