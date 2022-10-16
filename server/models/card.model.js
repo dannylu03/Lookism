@@ -8,18 +8,22 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
   },
+  
   img: {
     data: Buffer,
     contentType: String
   },
+
   clotheslist : [{
     type: String
-    }],
+  }],
+
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'User'
   },
+
   tags: [{
     type: String,
     required: true

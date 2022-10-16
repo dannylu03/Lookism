@@ -1,7 +1,9 @@
 import express from "express";
-import { recommendOutfits } from "../Controller/recommend";
+import { recommendOutfits, createData } from "../Controller/recommend";
 
 const router = express.Router();
-router.post("/recommendOutfit", recommendOutfits);
+
+router.get("/recommendOutfit", recommendOutfits);
+router.post('/cards', createData);
 
 export default router;
