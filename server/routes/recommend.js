@@ -1,5 +1,5 @@
 import express from "express";
-import { recommendOutfits, createData } from "../Controller/recommend";
+import { recommendOutfits, createData } from "../Controller/recommend.js";
 
 const router = express.Router();
 
