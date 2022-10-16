@@ -4,17 +4,21 @@ import Gallery from "../../Gallery";
 import { useNavigate } from "react-router-dom";
 
 const Onboarding = ({ user }) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`
+        }
+    };
     const navigate = useNavigate();
     const [userStyles, setStyles] = useState([])
     const updatingUser = () => {
         axios.put(`http://localhost:8000/users/update/${user._id}`, {
-            username: user.name,
             tags: userStyles
+        }, config)
+        .then(res => {
+            navigate("/home");
         })
-            .then(res => {
-                navigate("/home");
-            })
-            .catch(err => console.log(err))
+        .catch(err => console.log(err))
     }
     return ( 
         <div className="bg-cultured w-screen h-screen flex flex-col justify-center items-center">

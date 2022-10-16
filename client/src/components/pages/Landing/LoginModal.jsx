@@ -14,7 +14,6 @@ function LoginModal ({ closeModal, setUser }) {
             username: username,
             password: password,
         }).then(res => {
-            console.log(res.data)
             setUser(res.data)
             closeModal(false);
             navigate("/home");

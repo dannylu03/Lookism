@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import landing_image from "../../../assets/image/landing_image.png";
+import logo from "../../../assets/image/lookism.png"
 import RegisterModal from "./RegisterModal";
 import LoginModal from "./LoginModal";
 
@@ -9,15 +10,15 @@ function Landing({ setUser }) {
   const [openLoginModal, setOpenLoginModal] = useState(false);
 
   return (
-    <div className="relative flex flex-col min-h-screen items-center bg-cultured">
-      <h1 className="font-bold text-3xl text-camel p-10">Lookism</h1>
-      <div className="flex flex-col items-center">
+    <div className="relative flex flex-col h-screen items-center justify-center bg-cultured">
+      <img src={logo} alt="Lookism" className="h-1/10 w-1/5 top-0 left-0 p-4 absolute"/>
+      <div className="flex flex-col items-center justify-center w-full h-full">
         <img
           src={landing_image}
           alt="card images of styles"
-          className="scale-75"
+          className="h-1/2"
         />
-        <h3 className="text-2xl text-cafe-noir">
+        <h3 className="text-2xl font-bold text-camel">
           Find Your Lookism. Discover Yourself.
         </h3>
         <div className="flex flex-col justify-around w-1/2">
