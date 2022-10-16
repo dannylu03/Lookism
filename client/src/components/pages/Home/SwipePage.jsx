@@ -101,7 +101,7 @@ function SwipePage ({ user }) {
 
 
     return (
-        <VStack>
+        <VStack className="absolute top-0 left-[55%] h-screen">
             <h1 className="w-full text-center">"Swipe" Left or Right!</h1>
             <SwipeCard image={cardBatch[numSwipe]?.img || "0-minimalist.jpeg"} swipedLeft={swipedLeft} swipedRight={swipedRight}/>
             <HStack gap={100}>
