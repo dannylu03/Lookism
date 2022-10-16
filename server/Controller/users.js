@@ -109,7 +109,6 @@ export const getUserId = asyncHandler (async (req, res) => {
 })
 
 export const updateUser = asyncHandler (async (req, res) => {
-    
     const user = await User.findById(req.params.id)
     const username = req.body.username
     const password = req.body.password

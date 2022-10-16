@@ -19,13 +19,14 @@ function RegisterModal({ setUser, closeModal }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     let data = {
-      sizing: {
+        sizing: {
         shoesize: shoeSize,
         pantsize: pantsSize,
       },
+      gender: gender,
       username: username,
       password: password,
-      gender: gender,
+      tags: []
     };
 
     const headers = {
