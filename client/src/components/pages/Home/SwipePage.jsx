@@ -30,7 +30,7 @@ function SwipePage ({ user }) {
         }
     };
     const swipeLeft = () => {
-        setNumSwiped((numSwipe + 1) % 5);
+        setNumSwiped((numSwipe + 1) % 10);
         setSwipedLeft(true);
         setTimeout(() => {
             setSwipedLeft(false);
@@ -45,7 +45,7 @@ function SwipePage ({ user }) {
             // console.log(user.likedphotos);
             // user.likedphotos.push(cardBatch[numSwipe])
             setUserTags(userTags.slice(0).concat(...cardBatch[numSwipe].tags))
-            setNumSwiped((numSwipe + 1) % 5);
+            setNumSwiped((numSwipe + 1) % 10);
             setSwipedRight(true);
             setTimeout(() => {
                 setSwipedRight(false);
@@ -82,16 +82,51 @@ function SwipePage ({ user }) {
             clotheslist: ["trench", "coat"],
             user: "634ae34fa67aa4f584cdaafc",
             tags: ["cosplay", "artsy"],
-            img: "10-cosplay.jpeg"
+            img: "yu.jpg"
         }
         const Card5 = {
             name: "YOLO",
             clotheslist: ["dress, pants"],
             user: "634ae34fa67aa4f584cdaafc",
             tags: ["rave", "artsy"],
-            img: "17-rave.jpeg"
+            img: "terry.jpg"
         }
-        setCardBatch([Card1, Card2, Card3, Card4, Card5]);
+        const Card6 = {
+            name: "BTS",
+            clotheslist: ["Jacket"],
+            user: "634ae34fa67aa4f584cdaafc",
+            tags: ['kpop', 'edgy', 'elegant'],
+            img: "juan.jpg"
+        }
+        const Card7 = {
+            name: "Chilling",
+            clotheslist: ["Hoodie"],
+            user: "634ae34fa67aa4f584cdaafc",
+            tags: ["casual", "edgy", "skater"],
+            img: "danny.jpg"
+        }
+        const Card8 = {
+            name: "Fighting",
+            clotheslist: ["camouflage", "jacket"],
+            user: "634ae34fa67aa4f584cdaafc",
+            tags: ["military", "rave"],
+            img: "7-skater.jpeg"
+        }
+        const Card9 = {
+            name: "Good Times",
+            clotheslist: ["trench", "coat"],
+            user: "634ae34fa67aa4f584cdaafc",
+            tags: ["cosplay", "artsy"],
+            img: "11-elegant.jpeg"
+        }
+        const Card10 = {
+            name: "YOLO",
+            clotheslist: ["dress, pants"],
+            user: "634ae34fa67aa4f584cdaafc",
+            tags: ["rave", "artsy"],
+            img: "0-minimalist.jpeg",
+        }
+        setCardBatch([Card1, Card2, Card3, Card4, Card5, Card6, Card7, Card8, Card9, Card10]);
         axios.get(`http://localhost:8000/users/${user._id}`, config)
         .then(res => {
             setUserTags(res.data.tags);
@@ -101,7 +136,7 @@ function SwipePage ({ user }) {
 
 
     return (
-        <VStack className="absolute top-0 left-[55%] h-screen">
+        <VStack className="absolute top-0 left-[55%] h-screen -z-10">
             <h1 className="w-full text-center">"Swipe" Left or Right!</h1>
             <SwipeCard image={cardBatch[numSwipe]?.img || "0-minimalist.jpeg"} swipedLeft={swipedLeft} swipedRight={swipedRight}/>
             <HStack gap={100}>
